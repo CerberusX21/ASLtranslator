@@ -1,0 +1,4 @@
+flet
+python-dotenv
+numpy
+scikit-learn

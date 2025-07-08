@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# VSCode / PyCharm project files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS / system files
+.DS_Store
+Thumbs.db
+
+# Compiled files
+*.exe
+*.dll
+*.obj
+*.o
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Flet cache (if any future versions generate local builds)
+.flet/
