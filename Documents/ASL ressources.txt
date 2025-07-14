@@ -1,0 +1,3 @@
+MQTT communication in python : https://www.emqx.com/en/blog/how-to-use-mqtt-in-python
+documentation python MQTT    : https://eclipse.dev/paho/files/paho.mqtt.python/html/client.html
+				
