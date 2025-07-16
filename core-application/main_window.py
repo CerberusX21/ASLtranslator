@@ -3,16 +3,47 @@ from text_display_panel import create_text_display
 import time
 
 def create_main_window(page: ft.Page):
-    # page
-    page.title = "🤟 ASL Translator"
+    # Page configuration
+    page.title = "ASL Translator"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.padding = 30
+    page.padding = 0
     page.bgColor = "#0f172a"
 
     is_translating = False
     word_mode = True
 
+    top_left_img = ft.Image(
+        src="assets/ok-.png",
+        width=150,
+        height=150,
+        opacity= 0.8,
+        top=5,
+        left=10,
+        fit=ft.ImageFit.CONTAIN,
+        rotate=100
+    )
+
+    top_right_img = ft.Image(
+        src="assets/yo-.png",
+        width=200,
+        height=200,
+        opacity= 0.8,
+        fit=ft.ImageFit.CONTAIN,
+        top=10,
+        right=10,
+        rotate=200
+    )
+
+    bottom_left_img = ft.Image(
+        src="assets/Peace-.png",
+        width=150,
+        height=150,
+        opacity= 0.8,
+        fit=ft.ImageFit.CONTAIN,
+        bottom=5,
+        left=10
+    )
 
     title = ft.Container(
         content=ft.Column([
@@ -53,7 +84,7 @@ def create_main_window(page: ft.Page):
             ft.Text("Words", color="white"),
         ],
         alignment=ft.MainAxisAlignment.CENTER,
-        spacing=10
+        spacing=30
     )
 
     output = ft.Container(
@@ -82,12 +113,11 @@ def create_main_window(page: ft.Page):
             spacing=10
         ),
         on_click=lambda e: start_translation(e),
-        bgcolor="#4CAF50",  # Green
+        bgcolor="#4CAF50",
         style=ft.ButtonStyle(
             shape=ft.RoundedRectangleBorder(radius=10),
             padding=20,
             overlay_color=ft.Colors.with_opacity(0.2, "white"),
-            elevation={"": 8, "pressed": 1},
             animation_duration=300,
         ),
         width=150,
@@ -108,7 +138,6 @@ def create_main_window(page: ft.Page):
             shape=ft.RoundedRectangleBorder(radius=10),
             padding=20,
             overlay_color=ft.Colors.with_opacity(0.2, "white"),
-            elevation={"": 8, "pressed": 1},
             animation_duration=300,
         ),
         width=150,
@@ -143,12 +172,8 @@ def create_main_window(page: ft.Page):
         status_message.value = f"Detecting {'words' if word_mode else 'letters'}..."
         page.update()
 
-        # Simulate translation process
         time.sleep(1)
-        if word_mode:
-            output.content.value = "Hello friend!"
-        else:
-            output.content.value = "A B C D"
+        update_output_text()
         page.update()
 
     def stop_translation(e):
@@ -160,29 +185,38 @@ def create_main_window(page: ft.Page):
         status_message.value = "Press START to begin detection"
         page.update()
 
-    # Main layout
     main_column = ft.Column(
         [
             title,
             mode_switch,
-            ft.Container(height=20),  # Spacer instead of divider
+            ft.Container(height=20),
             output,
-            ft.Container(height=20),  # Spacer
+            ft.Container(height=20),
             ft.Row(
                 [start_button, stop_button],
                 alignment=ft.MainAxisAlignment.CENTER,
                 spacing=20
             ),
-            ft.Container(height=10),  # Spacer
+            ft.Container(height=10),
             status_message
         ],
-        spacing=0,  # No additional spacing between elements
+        spacing=10,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         expand=True
     )
 
-    return ft.Container(
+    main_container = ft.Container(
         content=main_column,
         padding=ft.padding.symmetric(horizontal=20),
+        expand=True
+    )
+
+    return ft.Stack(
+        [
+            top_left_img,
+            top_right_img,
+            bottom_left_img,
+            main_container
+        ],
         expand=True
     )
